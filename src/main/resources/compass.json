@@ -1,0 +1,58 @@
+[
+  {
+    "side": "NORTH",
+    "degrees": {
+      "startDegree": 330,
+      "endDegree": 30
+    }
+  },
+  {
+    "side": " EAST",
+    "degrees": {
+      "startDegree": 60,
+      "endDegree": 120
+    }
+  },
+  {
+    "side": "SOUTH",
+    "degrees": {
+      "startDegree": 150,
+      "endDegree": 210
+    }
+  },
+  {
+    "side": "WEST",
+    "degrees": {
+      "startDegree": 240,
+      "endDegree": 300
+    }
+  },
+  {
+    "side": "NORTH-WEST",
+    "degrees": {
+      "startDegree": 301,
+      "endDegree": 329
+    }
+  },
+  {
+    "side": "NORTH-EAST",
+    "degrees": {
+      "startDegree": 31,
+      "endDegree": 59
+    }
+  },
+  {
+    "side": "SOUTH-WEST",
+    "degrees": {
+      "startDegree": 211,
+      "endDegree": 239
+    }
+  },
+  {
+    "side": "SOUTH-EAST",
+    "degrees": {
+      "startDegree": 121,
+      "endDegree": 149
+    }
+  }
+]
