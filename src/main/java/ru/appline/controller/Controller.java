@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.appline.logic.Compass;
 import ru.appline.logic.CompassModel;
+import ru.appline.logic.Degrees;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,17 +18,31 @@ public class Controller {
     private static final CompassModel compassModel = CompassModel.getInstance();
 
     /*
-        Пример файла json: 'src\main\resources\compass.json'
+        Пример файла json: 'src\main\resources\compass_v1_with_ArrayList.json'
      */
-    @PostMapping(value = "/createCompass", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ArrayList<Compass>> createCompass(@RequestBody ArrayList<Compass> newCompassPoints) {
-        compassModel.add(newCompassPoints);
+    @PostMapping(value = "/createCompassAsList", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ArrayList<Compass>> createCompassAsList(@RequestBody ArrayList<Compass> newCompassPoints) {
+        compassModel.addV1(newCompassPoints);
         return ResponseEntity.ok(newCompassPoints);
     }
 
-    @GetMapping(value = "/getAll", produces = "application/json")
-    public ArrayList<Compass> getAll() {
-        return compassModel.getAll();
+    /*
+        Пример файла json: 'src\main\resources\compass_v2_with_Map.json'
+     */
+    @PostMapping(value = "/createCompassAsMap", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<String, Degrees>> createCompassAsMap(@RequestBody Map<String, Degrees> newCompassPoints) {
+        compassModel.addV2(newCompassPoints);
+        return ResponseEntity.ok(newCompassPoints);
+    }
+
+    @GetMapping(value = "/getAllList", produces = "application/json")
+    public ArrayList<Compass> getAllList() {
+        return compassModel.getAllList();
+    }
+
+    @GetMapping(value = "/getAllMap", produces = "application/json")
+    public Map<String, Degrees> getAllMap() {
+        return compassModel.getAllMap();
     }
 
     /*
@@ -35,8 +50,18 @@ public class Controller {
             "Degree": 10
         }
     */
-    @GetMapping(value = "/getSide", consumes = "application/json", produces = "application/json")
-    public Pair<String, String> getSideByDegree(@RequestBody Map<String, Integer> degree) {
-        return new Pair<String, String>("Side", compassModel.getSideByDegree(degree.get("Degree")));
+    @GetMapping(value = "/getSideV1", consumes = "application/json", produces = "application/json")
+    public Pair<String, String> getSideByDegreeV1(@RequestBody Map<String, Integer> degree) {
+        return new Pair<String, String>("Side", compassModel.getSideByDegreeV1(degree.get("Degree")));
+    }
+
+    /*
+        {
+            "Degree": 10
+        }
+    */
+    @GetMapping(value = "/getSideV2", consumes = "application/json", produces = "application/json")
+    public Pair<String, String> getSideByDegreeV2(@RequestBody Map<String, Integer> degree) {
+        return new Pair<String, String>("Side", compassModel.getSideByDegreeV2(degree.get("Degree")));
     }
 }

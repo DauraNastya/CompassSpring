@@ -1,0 +1,34 @@
+{
+  "NORTH": {
+    "startDegree": 330,
+    "endDegree": 30
+  },
+  " EAST": {
+    "startDegree": 60,
+    "endDegree": 120
+  },
+  "SOUTH": {
+    "startDegree": 150,
+    "endDegree": 210
+  },
+  "WEST": {
+    "startDegree": 240,
+    "endDegree": 300
+  },
+  "NORTH_WEST": {
+    "startDegree": 301,
+    "endDegree": 329
+  },
+  "NORTH_EAST": {
+    "startDegree": 31,
+    "endDegree": 59
+  },
+  "SOUTH_WEST": {
+    "startDegree": 211,
+    "endDegree": 239
+  },
+  "SOUTH_EAST": {
+    "startDegree": 121,
+    "endDegree": 149
+  }
+}
