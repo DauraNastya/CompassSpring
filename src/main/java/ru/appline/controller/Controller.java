@@ -30,7 +30,7 @@ public class Controller {
         Пример файла json: 'src\main\resources\compass_v2_with_Map.json'
      */
     @PostMapping(value = "/createCompassAsMap", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Map<String, Degrees>> createCompassAsMap(@RequestBody Map<String, Degrees> newCompassPoints) {
+    public ResponseEntity<Map<String, String>> createCompassAsMap(@RequestBody Map<String, String> newCompassPoints) {
         compassModel.addV2(newCompassPoints);
         return ResponseEntity.ok(newCompassPoints);
     }

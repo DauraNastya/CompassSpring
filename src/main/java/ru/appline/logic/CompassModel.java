@@ -8,11 +8,11 @@ import java.util.Map;
 public class CompassModel implements Serializable {
     private static final CompassModel instance = new CompassModel();
     private final ArrayList<Compass> modelAsList;
-    private final Map<String, Degrees> modelAsMap;
+    private final Map<String, Degrees> parsedModel;
 
     public CompassModel() {
         this.modelAsList = new ArrayList<Compass>();
-        this.modelAsMap = new HashMap<String, Degrees>();
+        this.parsedModel = new HashMap<String, Degrees>();
     }
 
     public static CompassModel getInstance() {
@@ -24,9 +24,19 @@ public class CompassModel implements Serializable {
         modelAsList.addAll(compassPoints);
     }
 
-    public void addV2(Map<String, Degrees> compassPoints) {
-        modelAsMap.clear();
-        modelAsMap.putAll(compassPoints);
+    public void addV2(Map<String, String> compassPoints) {
+        parsedModel.clear();
+        parseDegrees(compassPoints);
+    }
+
+    public void parseDegrees(Map<String, String> compassPoints) {
+        if (!compassPoints.isEmpty()) {
+            String[] degrees;
+            for (Map.Entry<String, String> compass : compassPoints.entrySet()) {
+                degrees = compass.getValue().split("-");
+                parsedModel.put(compass.getKey(), new Degrees(Integer.parseInt(degrees[0]), Integer.parseInt(degrees[1])));
+            }
+        }
     }
 
     public ArrayList<Compass> getAllList() {
@@ -34,7 +44,7 @@ public class CompassModel implements Serializable {
     }
 
     public Map<String, Degrees> getAllMap() {
-        return modelAsMap;
+        return parsedModel;
     }
 
     public String getSideByDegreeV1(int degree) {
@@ -54,7 +64,7 @@ public class CompassModel implements Serializable {
         int startPoint = 0;
         int endPoint = 360;
         Degrees degrees;
-        for (Map.Entry<String, Degrees> compass : modelAsMap.entrySet()) {
+        for (Map.Entry<String, Degrees> compass : parsedModel.entrySet()) {
             degrees = compass.getValue();
             if (defineSide(degree, startPoint, endPoint, degrees)) {
                 return compass.getKey();
